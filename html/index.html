@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="../css/style.css">
     <script  defer src="../js/scriptFrutas.js"></script>
 </head>
-<body>
+<body onload="re_start();">
     <header>
-        <h1>La tienda de frutas Klabos</h1>
+        <h1 onclick="limpiarTextArea();">La tienda de frutas Klabos</h1>
     </header> <!-- logo y barra menu -->
     <div class="mainSection">
         <div class="horizontalSection">
@@ -69,7 +69,7 @@
             </div>
         </div>
         <div class="horizontalSection">
-            <textarea name="" id="" cols="70" rows="14"></textarea>
+            <textarea name="" id="textAreaFactura" cols="70" rows="14"></textarea>
             <button id="botonComprar" onclick="mostrarCompra();">Mostrar compra.</button>
         </div>
         
