@@ -13,15 +13,19 @@ var cestaLimon=["limon", parseFloat(document.getElementById("precioLimon").inner
 var cestaCompra = [cestaKiwi,cestaPera,cestaManzana,cestaPlatano,cestaMandarina,cestaNaranja,cestaMelon,cestaSandia,cestaPinna,cestaLimon];
 
 //Funcionalidad básica de modificar y preparar la web
-var addUnKiloAFrutaPorID = ID_FrutaPosicionCestaCompra =>  cestaCompra[ID_FrutaPosicionCestaCompra][2]++;
+var addUnKiloAFrutaPorID = ID_FrutaPosicionCestaCompra => {cestaCompra[ID_FrutaPosicionCestaCompra][2]++; limpiarTextArea();}
 var limpiarTextArea = () => document.getElementById("textAreaFactura").value="";
 var limpiarCestaCompra = () => {
+    cestaCompra = [cestaKiwi,cestaPera,cestaManzana,cestaPlatano,cestaMandarina,cestaNaranja,cestaMelon,cestaSandia,cestaPinna,cestaLimon];
     for(let i=0; i<cestaCompra.length;i++){
         cestaCompra[i][2]=0;
     }
 }
-//Funciones mostrar mensajes
-var mostrarKilosFruta = (texAreaElement, i) => texAreaElement.value+=cestaCompra[i][0]+"  --- "+cestaCompra[i][2]+" "+kilo_or_kilos(cestaCompra[i][2])+"\n";
+//Onload
+function re_start(){
+    limpiarTextArea();
+    limpiarCestaCompra();
+}
 //Funciones para tratar el array de cestaCompra
 function ordenarCestaCompra(){
     CestaCompraOrdenadaAlfabeticamente =cestaCompra.sort(function(a,b){
@@ -31,27 +35,23 @@ function ordenarCestaCompra(){
 } 
 // // //Para saber si tiene que ecribir kilos en singular o plurar
 var kilo_or_kilos = num => num<=1?"kilo":"kilos";
-//Onload
-function re_start(){
-    limpiarTextArea();
-    limpiarCestaCompra();
-}
+
 
 function mostrarCompra(){
     let texAreaElement = document.getElementById("textAreaFactura");
     let precioTotal = 0;
     let kilos = 0;
     let precioMedioKilo = 0;
-
+    let cestaCompraDatosTratados = [];
     limpiarTextArea();
-    cestaCompra=ordenarCestaCompra();
-    cestaCompra=cestaCompra.filter(fruta=>fruta[2]!=0); //Eliminar elementos con 0 kilos
+    cestaCompraDatosTratados=ordenarCestaCompra();
+    cestaCompraDatosTratados=cestaCompra.filter(fruta=>fruta[2]!=0); //Eliminar elementos con 0 kilos
     texAreaElement.value+="\n";
 
-    for(let i=0; i<cestaCompra.length; i++){ 
-        mostrarKilosFruta(texAreaElement, i);
-        precioTotal+=cestaCompra[i][2]*cestaCompra[i][1];
-        kilos+=cestaCompra[i][2];
+    for(let i=0; i<cestaCompraDatosTratados.length; i++){ 
+        texAreaElement.value+=cestaCompraDatosTratados[i][0]+"  --- "+cestaCompraDatosTratados[i][2]+" "+kilo_or_kilos(cestaCompraDatosTratados[i][2])+"\n";
+        precioTotal+=cestaCompraDatosTratados[i][2]*cestaCompraDatosTratados[i][1];
+        kilos+=cestaCompraDatosTratados[i][2];
     }
     precioMedioKilo = precioTotal/kilos;
     texAreaElement.value+="Precio total: "+precioTotal.toFixed(2)+" €"+"\n";
