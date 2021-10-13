@@ -20,11 +20,9 @@ var limpiarCestaCompra = () => {
         cestaCompra[i][2]=0;
     }
 }
-
-
-//Funciones para tratar el array de cestaCompra
-var masDeCeroKilosFruta = (num) => num==0?false:true;
+//Funciones mostrar mensajes
 var mostrarKilosFruta = (texAreaElement, i) => texAreaElement.value+=cestaCompra[i][0]+"  --- "+cestaCompra[i][2]+" "+kilo_or_kilos(cestaCompra[i][2])+"\n";
+//Funciones para tratar el array de cestaCompra
 function ordenarCestaCompra(){
     CestaCompraOrdenadaAlfabeticamente =cestaCompra.sort(function(a,b){
         return a[0]<b[0];
@@ -33,7 +31,11 @@ function ordenarCestaCompra(){
 } 
 // // //Para saber si tiene que ecribir kilos en singular o plurar
 var kilo_or_kilos = num => num<=1?"kilo":"kilos";
-
+//Onload
+function re_start(){
+    limpiarTextArea();
+    limpiarCestaCompra();
+}
 
 function mostrarCompra(){
     let texAreaElement = document.getElementById("textAreaFactura");
@@ -43,12 +45,11 @@ function mostrarCompra(){
 
     limpiarTextArea();
     cestaCompra=ordenarCestaCompra();
+    cestaCompra=cestaCompra.filter(fruta=>fruta[2]!=0); //Eliminar elementos con 0 kilos
     texAreaElement.value+="\n";
 
-    for(let i=0; i<cestaCompra.length; i++){
-        if (masDeCeroKilosFruta(cestaCompra[i][2])){
-            mostrarKilosFruta(texAreaElement, i);
-        }   
+    for(let i=0; i<cestaCompra.length; i++){ 
+        mostrarKilosFruta(texAreaElement, i);
         precioTotal+=cestaCompra[i][2]*cestaCompra[i][1];
         kilos+=cestaCompra[i][2];
     }
@@ -58,8 +59,3 @@ function mostrarCompra(){
     limpiarCestaCompra();
 }
 
-//Onload
-function re_start(){
-    limpiarTextArea();
-    limpiarCestaCompra();
-}
