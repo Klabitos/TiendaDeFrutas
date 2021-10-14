@@ -19,7 +19,7 @@ var limpiarCestaCompra = () => {
     cestaCompra = [cestaKiwi,cestaPera,cestaManzana,cestaPlatano,cestaMandarina,cestaNaranja,cestaMelon,cestaSandia,cestaPinna,cestaLimon];
     for(let i=0; i<cestaCompra.length;i++){
         cestaCompra[i][2]=0;
-    }
+    } //TODO HACER CON MAP
 }
 //Onload
 function re_start(){
