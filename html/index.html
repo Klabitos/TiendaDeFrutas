@@ -1,69 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>La tienda de frutas Klabos</title>
     <link rel="stylesheet" href="../css/style.css">
-    <script  defer src="../js/scriptFrutas.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
+    <script defer src="../js/scriptFrutas.js"></script>
 </head>
+
 <body onload="re_start();">
     <header>
         <h1 onclick="limpiarTextArea();">La tienda de frutas Klabos</h1>
     </header> <!-- logo y barra menu futuros-->
     <div class="mainSection">
         <div class="horizontalSection">
-            <div class="frame" id="kiwi">
-                <img src="../img/kiwi.jpg" alt="" onclick="addUnKiloAFrutaPorID(0);">
-                <p class="fruitName"> KIWI</p>
+            <div class="frame" id="0">
+                <img src="../img/kiwi.jpg" alt="" onclick="addUnKiloAFrutaPorID(0); cambioGradualColorFondoFrame(0);">
+                <p class="fruitName"> 類家庭所有</p>
                 <p class="fruitPrice" id="precioKiwi">2.00€ / Kg</p>
             </div>
-            <div class="frame">
-                <img src="../img/pera.jpg" alt="" onclick="addUnKiloAFrutaPorID(1);">
+            <div class="frame" id="1">
+                <img src="../img/pera.jpg" alt="" onclick="addUnKiloAFrutaPorID(1); cambioGradualColorFondoFrame(1);">
                 <p class="fruitName"> PERA</p>
                 <p class="fruitPrice" id="precioPera">1.50€ / Kg</p>
             </div>
-            <div class="frame">
-                <img src="../img/manzana.jpg" alt="" onclick="addUnKiloAFrutaPorID(2);">
+            <div class="frame" id="2">
+                <img src="../img/manzana.jpg" alt=""
+                    onclick="addUnKiloAFrutaPorID(2); cambioGradualColorFondoFrame(2);">
                 <p class="fruitName"> MANZANA</p>
                 <p class="fruitPrice" id="precioManzana">0.90€ / Kg</p>
             </div>
-            <div class="frame">
-                <img src="../img/platano.jpg" alt="" onclick="addUnKiloAFrutaPorID(3);">
+            <div class="frame" id="3">
+                <img src="../img/platano.jpg" alt=""
+                    onclick="addUnKiloAFrutaPorID(3); cambioGradualColorFondoFrame(3);">
                 <p class="fruitName"> PLÁTANO</p>
                 <p class="fruitPrice" id="precioPlatano">0.22€ / Kg</p>
             </div>
-            <div class="frame">
-                <img src="../img/mandarina.jpg" alt="" onclick="addUnKiloAFrutaPorID(4);">
+            <div class="frame" id="4">
+                <img src="../img/mandarina.jpg" alt=""
+                    onclick="addUnKiloAFrutaPorID(4); cambioGradualColorFondoFrame(4);">
                 <p class="fruitName"> MANDARINA</p>
                 <p class="fruitPrice" id="precioMandarina">3.00€ / Kg</p>
             </div>
         </div>
         <!-- SIGUIENTE LÍNEA -->
         <div class="horizontalSection">
-            <div class="frame">
-                <img src="../img/naranja.jpg" alt="" onclick="addUnKiloAFrutaPorID(5);">
+            <div class="frame" id="5">
+                <img src="../img/naranja.jpg" alt="" onclick="addUnKiloAFrutaPorID(5);cambioGradualColorFondoFrame(5);">
                 <p class="fruitName"> NARANJA</p>
                 <p class="fruitPrice" id="precioNaranja">3.40€ / Kg</p>
             </div>
-            <div class="frame">
-                <img src="../img/melon.jpg" alt="" onclick="addUnKiloAFrutaPorID(6);">
+            <div class="frame" id="6">
+                <img src="../img/melon.jpg" alt="" onclick="addUnKiloAFrutaPorID(6);cambioGradualColorFondoFrame(6);">
                 <p class="fruitName"> MELÓN</p>
                 <p class="fruitPrice" id="precioMelon">5.40€ / Kg</p>
             </div>
-            <div class="frame">
-                <img src="../img/sandia.png" alt="" onclick="addUnKiloAFrutaPorID(7);">
+            <div class="frame" id="7">
+                <img src="../img/sandia.png" alt="" onclick="addUnKiloAFrutaPorID(7);cambioGradualColorFondoFrame(7);">
                 <p class="fruitName"> SANDÍA</p>
                 <p class="fruitPrice" id="precioSandia">3.10€ / Kg</p>
             </div>
-            <div class="frame">
-                <img src="../img/pinna.jpg" alt="" onclick="addUnKiloAFrutaPorID(8);">
+            <div class="frame" id="8">
+                <img src="../img/pinna.jpg" alt="" onclick="addUnKiloAFrutaPorID(8);cambioGradualColorFondoFrame(8);">
                 <p class="fruitName"> PIÑA</p>
                 <p class="fruitPrice" id="precioPinna">2.20€ / Kg</p>
             </div>
-            <div class="frame">
-                <img src="../img/limon.jpg" alt="" onclick="addUnKiloAFrutaPorID(9);">
+            <div class="frame" id="9">
+                <img src="../img/limon.jpg" alt="" onclick="addUnKiloAFrutaPorID(9);cambioGradualColorFondoFrame(9);">
                 <p class="fruitName"> LIMÓN</p>
                 <p class="fruitPrice" id="precioLimon">0.99€ / Kg</p>
             </div>
@@ -72,10 +80,11 @@
             <textarea name="" id="textAreaFactura" cols="70" rows="14"></textarea>
             <button id="botonComprar" onclick="mostrarCompra();">Mostrar compra.</button>
         </div>
-        
+
     </div>
     <footer>
-        
+
     </footer>
 </body>
+
 </html>
