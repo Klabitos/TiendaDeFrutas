@@ -94,10 +94,10 @@ function re_start() {
 }
 //Funciones para tratar el array de cestaCompra
 function ordenarCestaCompra() {
-  CestaCompraOrdenadaAlfabeticamente = cestaCompra.sort(function (a, b) {
+  let cestaCompraOrdenadaAlfabeticamente = cestaCompra.sort(function (a, b) {
     return a[0] < b[0];
   });
-  return CestaCompraOrdenadaAlfabeticamente;
+  return cestaCompraOrdenadaAlfabeticamente;
 }
 // // //Para saber si tiene que ecribir kilos en singular o plurar
 var kilo_or_kilos = (num) => (num <= 1 ? "kilo" : "kilos");
@@ -143,7 +143,6 @@ function cambioGradualColorFondoFrame(id) {
   setTimeout(() => {
     finalizarCambioColorClick(id);
   }, 200);
-  console.log("bien");
 }
 
 function finalizarCambioColorClick(id) {
