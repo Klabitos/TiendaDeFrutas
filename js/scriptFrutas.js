@@ -1,4 +1,6 @@
 //Variables globales. Almacenan nombre+precio+kilos
+"use strict";
+
 var cestaKiwi = [
   "kiwi",
   parseFloat(document.getElementById("precioKiwi").innerHTML),
