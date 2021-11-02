@@ -109,8 +109,10 @@ function mostrarCompra() {
   let precioMedioKilo = 0;
   let cestaCompraDatosTratados = [];
   limpiarTextArea();
+  //TODO ORDENAR BIEN
+  cestaCompraDatosTratados = cestaCompraDatosTratados.filter((fruta) => fruta[2] != 0); //Eliminar elementos con 0 kilos
   cestaCompraDatosTratados = ordenarCestaCompra();
-  cestaCompraDatosTratados = cestaCompra.filter((fruta) => fruta[2] != 0); //Eliminar elementos con 0 kilos
+
   texAreaElement.value += "\n";
   texAreaElement.value += "-------------------\n";
 
