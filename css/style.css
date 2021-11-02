@@ -35,6 +35,7 @@ header h1{
     
 }
 
+
 .zonaLateral{
     width: 25%;
     height: 85%;
@@ -56,7 +57,9 @@ header h1{
     margin: 1%;
     margin-left: 1.6%;
     border-radius: 13px;
+    
 }
+
 .frame_clicked{
     transition: ease-in-out 2ms;
     width: 14.5%;
@@ -86,10 +89,28 @@ header h1{
     padding: 0%;
 }
 
-.inputTextKG{
-    size: 4;
-    maxlength:4;
+.invisiblePrice_moved{
+    visibility: visible;
+    position: relative;
+    margin-top: 2%;
+    border: 1.5px solid rgba(17, 26, 17, 0.61);
+    background-color: rgba(231, 203, 160, 0.616);
+    width: 45%;
+    padding: 0.2%;
+    font-size:small;;
+    text-align: center;
+    float: right;
+    transition: 1s;
 }
+
+.inputTextKG{   
+   margin-left: 26%;
+   transition: 1s;
+}
+.inputTextKG_moved{
+    margin-left: 2%; 
+    transition: 1s;
+ }
 
 
 .horizontalSection textarea{

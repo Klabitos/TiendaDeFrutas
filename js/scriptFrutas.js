@@ -41,6 +41,35 @@ Precio medio: xx €/kg
 
 //Variables globales. Almacenan nombre+precio+kilos
 "use strict";
+var div0 = document.getElementById("0");
+var input1 = document.getElementById("precioKiwi");
+var elemento0creado=false;
+input1.addEventListener("input", () =>{
+  if(elemento0creado==false){ //Para que no sea acumulativo
+    elemento0creado=true;
+    input1.classList.remove("inputTextKG"); 
+    input1.classList.add("inputTextKG_moved"); 
+    //TODO meter timeout de 1s
+    setTimeout(function(){  
+    var invisible1 = document.createElement("span");
+    div0.insertBefore(invisible1, input1).focus();
+    invisible1.id="invisible1";
+    invisible1.innerText="2.00€/Kg";
+    invisible1.classList.add("invisiblePrice_moved");
+    }, 900);   
+  }
+}); 
+input1.addEventListener("blur", ()=>{
+  if(input1.value==""){
+    elemento0creado=false;
+    input1.classList.remove("inputTextKG_moved"); 
+    input1.classList.add("inputTextKG");
+    div0.removeChild(invisible1);
+  }
+  
+})
+
+
 
 var cestaKiwi = [
   "kiwi",
