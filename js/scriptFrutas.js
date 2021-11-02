@@ -41,6 +41,9 @@ Precio medio: xx €/kg
 
 //Variables globales. Almacenan nombre+precio+kilos
 "use strict";
+
+//METODO CASERO Y A MANO QUE HACE LA APARICION DEL PRECIO DE LOS KILOS
+//TODO UN ABSOLUTE COMO PLACEHOLDER?
 var div0 = document.getElementById("0");
 var input1 = document.getElementById("precioKiwi");
 var elemento0creado=false;
@@ -49,14 +52,13 @@ input1.addEventListener("input", () =>{
     elemento0creado=true;
     input1.classList.remove("inputTextKG"); 
     input1.classList.add("inputTextKG_moved"); 
-    //TODO meter timeout de 1s
     setTimeout(function(){  
     var invisible1 = document.createElement("span");
     div0.insertBefore(invisible1, input1).focus();
     invisible1.id="invisible1";
     invisible1.innerText="2.00€/Kg";
     invisible1.classList.add("invisiblePrice_moved");
-    }, 900);   
+    }, 220);   
   }
 }); 
 input1.addEventListener("blur", ()=>{
