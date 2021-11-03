@@ -108,6 +108,15 @@ header h1{
    transition: 0.5s;
    text-align: center;
 }
+.frame span{
+    font-size: smaller;
+    opacity: 0;
+    transition: 0.2s;
+}
+span.show{
+    opacity: 1;
+    transition: 0.2s;
+}
 p.hide{
     opacity: 0;
 }

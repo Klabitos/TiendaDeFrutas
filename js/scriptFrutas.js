@@ -42,37 +42,43 @@ Precio medio: xx €/kg
 //Variables globales. Almacenan nombre+precio+kilos
 "use strict";
 
-//METODO CASERO Y A MANO QUE HACE LA APARICION DEL PRECIO DE LOS KILOS
-//TODO UN ABSOLUTE COMO PLACEHOLDER?
-var div0 = document.getElementById("0");
-var input1 = document.getElementById("precioKiwi");
-var invisible2 = document.getElementById("invisible2");
-var elemento0creado=false;
-input1.addEventListener("input", () =>{
-  if(elemento0creado==false && input1.value!=""){ //Para que no sea acumulativo
-    elemento0creado=true; 
-    fadein(parseFloat(document.getElementById("precioKiwi").placeholder).toFixed(2));   
-  }
-}); 
-input1.addEventListener("blur", ()=>{
-  if(input1.value=="" && elemento0creado==true){
-    elemento0creado=false;
-    fadein(parseFloat(document.getElementById("precioKiwi").placeholder).toFixed(2));
-    }; 
-  }
-);
 
-function fadein(precio){
-  invisible2.classList.add('hide');
+var arrayDivs = document.getElementsByClassName("frame");
+var inputs = document.getElementsByClassName("inputTextKG");
+var textoCambiante = document.getElementsByClassName("invisiblePrice_moved");
+var arraySpan = document.getElementsByTagName("span");
+var arrayAuxiliar=[false,false,false,false,false,false,false,false,false,false] //Evitar un miniBug que hacia que se pudiera cambiar el TextoCambiante al hacer click
+
+for(let i=0; i<10; i++){
+  inputs[i].addEventListener("input", () =>{
+    if(arrayAuxiliar[i]==false && inputs[i].value!=""){ 
+      arrayAuxiliar[i]=true; 
+      fadein(parseFloat(inputs[i].placeholder).toFixed(2), i);   
+    }
+  }); 
+  inputs[i].addEventListener("blur", ()=>{
+    if(inputs[i].value=="" && arrayAuxiliar[i]==true){
+      arrayAuxiliar[i]=false;
+      fadein(parseFloat(inputs[i].placeholder).toFixed(2), i);   
+      }; 
+    }
+  );
+}
+
+
+function fadein(precio, i){
+  textoCambiante[i].classList.add('hide');
   setTimeout(function(){
-    if(invisible2.textContent==`${precio}€ / Kg`){
-      invisible2.textContent="Introduce Kg";
+    if(textoCambiante[i].textContent==`${precio}€ / Kg`){
+      textoCambiante[i].textContent="Introduce Kg";
+      arraySpan[i].classList.remove('show');
     }else{
-      invisible2.textContent=`${precio}€ / Kg`;
+      arraySpan[i].classList.add('show');
+      textoCambiante[i].textContent=`${precio}€ / Kg`;
     }
   }, 260); 
   setTimeout(function() { 
-    invisible2.classList.remove('hide')
+    textoCambiante[i].classList.remove('hide')
 }, 260);
 }
 
