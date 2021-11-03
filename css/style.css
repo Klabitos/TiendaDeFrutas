@@ -153,3 +153,10 @@ p.hide{
     background-color: rgb(248, 167, 60);
 
 }
+
+.negrita{
+    font-weight: bold;
+}
+.subrayado{
+    text-decoration: underline;
+}

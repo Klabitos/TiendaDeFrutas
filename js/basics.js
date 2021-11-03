@@ -94,6 +94,8 @@ function fadein(precio, i){
       textoCambiante[i].textContent="Introduce Kg";
       arraySpan[i].classList.remove('show');
     }else{
+      textoCambiante[i].classList.remove("negrita");
+      textoCambiante[i].classList.remove("subrayado");
       arraySpan[i].classList.add('show');
       textoCambiante[i].textContent=`${precio}€ / Kg`;
     }
@@ -125,6 +127,9 @@ function cambioGradualColorFondoVerdeFrame(i) {
   }, 200);
 }
 function cambioGradualColorFondoRojoFrame(i) {
+  textoCambiante[i].textContent="Introduce Kg!";
+  textoCambiante[i].classList.add("subrayado");
+  textoCambiante[i].classList.add("negrita");
   arraySpan[i].classList.add('show'); //mostrar texto "Kg"
   arrayDivs[i].classList.add("frame_clicked_red");
   setTimeout(() => {
