@@ -49,26 +49,26 @@ var input1 = document.getElementById("precioKiwi");
 var invisible2 = document.getElementById("invisible2");
 var elemento0creado=false;
 input1.addEventListener("input", () =>{
-  if(elemento0creado==false){ //Para que no sea acumulativo
+  if(elemento0creado==false && input1.value!=""){ //Para que no sea acumulativo
     elemento0creado=true; 
-    fadein();   
+    fadein(parseFloat(document.getElementById("precioKiwi").placeholder).toFixed(2));   
   }
 }); 
 input1.addEventListener("blur", ()=>{
-  if(input1.value==""){
+  if(input1.value=="" && elemento0creado==true){
     elemento0creado=false;
-    fadein();
+    fadein(parseFloat(document.getElementById("precioKiwi").placeholder).toFixed(2));
     }; 
   }
 );
 
-function fadein(){
+function fadein(precio){
   invisible2.classList.add('hide');
   setTimeout(function(){
-    if(invisible2.textContent=="2.00€ / Kg"){
+    if(invisible2.textContent==`${precio}€ / Kg`){
       invisible2.textContent="Introduce Kg";
     }else{
-      invisible2.textContent="2.00€ / Kg";
+      invisible2.textContent=`${precio}€ / Kg`;
     }
   }, 260); 
   setTimeout(function() { 
