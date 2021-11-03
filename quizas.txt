@@ -1,2 +1,1 @@
 https://codepen.io/peruvianidol/pen/MWboOEQ
-https://stackoverflow.com/questions/33952969/how-do-you-set-innertext-with-fade-in-effect

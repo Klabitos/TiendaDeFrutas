@@ -46,23 +46,35 @@ Precio medio: xx €/kg
 //TODO UN ABSOLUTE COMO PLACEHOLDER?
 var div0 = document.getElementById("0");
 var input1 = document.getElementById("precioKiwi");
-var invisible1 = document.getElementById("invisible1");
 var invisible2 = document.getElementById("invisible2");
 var elemento0creado=false;
 input1.addEventListener("input", () =>{
   if(elemento0creado==false){ //Para que no sea acumulativo
     elemento0creado=true; 
-    setTimeout(function(){  
-    invisible2.innerText="2.00€ / Kg";
-    }, 220);   
+    fadein();   
   }
 }); 
 input1.addEventListener("blur", ()=>{
   if(input1.value==""){
     elemento0creado=false;
-    invisible2.innerText="Introduce Kg";
+    fadein();
+    }; 
   }
-})
+);
+
+function fadein(){
+  invisible2.classList.add('hide');
+  setTimeout(function(){
+    if(invisible2.textContent=="2.00€ / Kg"){
+      invisible2.textContent="Introduce Kg";
+    }else{
+      invisible2.textContent="2.00€ / Kg";
+    }
+  }, 260); 
+  setTimeout(function() { 
+    invisible2.classList.remove('hide')
+}, 260);
+}
 
 
 
