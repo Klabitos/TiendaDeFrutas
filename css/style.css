@@ -11,7 +11,6 @@ body{
 }
 
 header h1{
-    
     margin-top: 3% ;
     background-color: cornsilk;
     margin-left: 20%;
@@ -20,13 +19,11 @@ header h1{
     border: 5px double   black;
     border-radius: 13px;
 }
-
 .mainSection{
     padding: 1%;
     padding-top: 3%;
     overflow: hidden;
 }
-
 .horizontalSection{
     overflow: hidden;
     margin-top: 0.5%;
@@ -34,8 +31,6 @@ header h1{
     margin-right: 10%;
     
 }
-
-
 .zonaLateral{
     width: 25%;
     height: 85%;
@@ -57,10 +52,9 @@ header h1{
     margin: 1%;
     margin-left: 1.6%;
     border-radius: 13px;
-    
 }
 
-.frame_clicked{
+.frame_clicked_green{
     transition: ease-in-out 2ms;
     width: 14.5%;
     padding: 1%;
@@ -71,20 +65,31 @@ header h1{
     margin-left: 1.6%;
     border-radius: 13px;
 }
+.frame_clicked_red{
+    transition: ease-in-out 2ms;
+    width: 14.5%;
+    padding: 1%;
+    border: 2px solid black;
+    float: left;
+    background-color: rgba(250, 210, 210, 0.808);
+    margin: 1%;
+    margin-left: 1.6%;
+    border-radius: 13px;
+}
 
-.frame img, .frame_clicked img{
+.frame img, .frame_clicked_green img, .frame_clicked_red img{
     margin-left: 25%;
     margin-right: 25%;
     width: 50%;
     border: 2px black solid;
 
 }
-.frame img:hover, .frame_clicked img:hover{
+.frame img:hover, .frame_clicked_green img:hover, .frame_clicked_red img:hover{
     border: 2px green solid;
     transform: scale(1.1, 1.1);
 }
 
-.frame p, .frame_clicked p{
+.frame p, .frame_clicked_green p, .frame_clicked_red p{
     text-align: center;
     padding: 0%;
 }
@@ -144,7 +149,6 @@ p.hide{
     margin-top: 6.5%;
     border-radius: 13px; 
 }
-
 #botonComprar:hover{
     background-color: rgb(248, 167, 60);
 

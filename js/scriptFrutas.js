@@ -1,10 +1,7 @@
+"use strict";
 /*TODO 
-
-OBJETOS(DATOS KILOS PRECIO) INSTANCIA DE UNA CLASE
-
 TRATAMIENTO DE ERRORES
-ORGANIZAR CODIGO EN ARCHIVOS
-----
+
 FUNCIONALIDAD-->
 
 PULSAR LA IMAGEN INTRODUCIRÁ LOS KILOS
@@ -12,8 +9,6 @@ PULSAR LA IMAGEN INTRODUCIRÁ LOS KILOS
 --CADA FRUTA VA AÑADIENDO INFORMACIÓN
 --SE SUBRAYA CADA VEZ QUE SE HA AÑADIDO ESA FRUTA Y SDE QUITA EL SOMBREADO DE L AULTIMA AÑADIDA
 --TODO SE QUITA CUANDO SE ACABA EL PEDIDO
-
-
 --BOTON METE EN LA CAJA DE TEXTO LA COMPRA
 ----1 LINEA CON FECHA Y HORA DE LA FINALIZACIÓN DEL PEDIDO
 ----CADA TIPO DE FRUTA APARECERÁ SOLO 1 VEZ CON TODOS LOS KILOS
@@ -30,15 +25,14 @@ Precio medio: xx €/kg
 
 
 -----MOSTRAR VENTANA EMERGENTE CON TODA LA INFO DE VERANO O INVIERNO
-
 -----TRAS LA FINALIZACIÓN DE UN PEDIDO Y A LOS 10 SEGUNDOS SE LIMPIA LA BARRA LATERAL, EL AREA DONDE SE MUESTRA LA COMPRA Y CUALQUIER VARIABLE INTERNA
-
+  
 */
 
 
 
-//Variables globales. Almacenan nombre+precio+kilos
-"use strict";
+
+
 
 
 
@@ -58,9 +52,9 @@ var addUnKiloAFrutaPorID = (ID_FrutaPosicionCestaCompra) => {
 //Onload
 
 //Funciones para tratar el array de cestaCompra
-function ordenarCestaCompra() {
+function ordenarCestaCompra(cesta) {
   
-  let cestaCompraOrdenadaAlfabeticamente = cestaCompra.sort(function(a,b){
+  let cestaCompraOrdenadaAlfabeticamente = cesta.sort(function(a,b){
     if(a.nombre < b.nombre) { return -1; }
     if(a.nombre > b.nombre) { return 1; }
     return 0;
@@ -80,15 +74,16 @@ function mostrarCompra() {
   let cestaCompraDatosTratados = [];
   limpiarTextArea();
   //TODO ORDENAR BIEN
+  cestaCompraDatosTratados = ordenarCestaCompra(cestaCompra);
   cestaCompraDatosTratados = cestaCompraDatosTratados.filter((fruta) => fruta[2] != 0); //Eliminar elementos con 0 kilos
-  cestaCompraDatosTratados = ordenarCestaCompra();
+  
 
   texAreaElement.value += "\n";
   texAreaElement.value += "-------------------\n";
 
   for (let i = 0; i < cestaCompraDatosTratados.length; i++) {
     texAreaElement.value +=
-      cestaCompraDatosTratados[i][0] +
+      cestaCompraDatosTratados[i].nombre +
       "  --- " +
       cestaCompraDatosTratados[i][2] +
       " " +
@@ -107,18 +102,11 @@ function mostrarCompra() {
   limpiarCestaCompra();
 }
 
-//ESTILIZAR EL CLICK
-function cambioGradualColorFondoFrame(id) {
-  let element = document.getElementById(id);
-  element.classList.remove("frame");
-  element.classList.add("frame_clicked");
-  setTimeout(() => {
-    finalizarCambioColorClick(id);
-  }, 200);
-}
 
-function finalizarCambioColorClick(id) {
-  let element = document.getElementById(id);
-  element.classList.remove("frame_clicked");
-  element.classList.add("frame");
+function comprobarNumerico(elemento){
+  if(isNaN(elemento.value) || elemento.value=="" || elemento.value<=0){
+    return false;
+  }else{
+    return true;
+  }
 }

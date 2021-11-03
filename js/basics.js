@@ -2,6 +2,7 @@
 ////////////////////////////////////////////////////////////
 //             Clases e instancias de objetos             //
 ////////////////////////////////////////////////////////////
+
 class Fruit{
     constructor(nombre, precio, kilosVez, kilosTotales){
       this.nombre = nombre;
@@ -37,9 +38,20 @@ class Fruit{
   //Almacena todos los productos
   var cestaCompra = [kiwi, pera, manzana, platano, mandarina, naranja, melon, sandia, pinna, limon];
   
+/////////////////////////////////////////////////////////////
+// Arrays con todos los elementos importantes de la página //
+/////////////////////////////////////////////////////////////
+
+var arrayDivs = document.getElementsByClassName("frame");
+var inputs = document.getElementsByClassName("inputTextKG");
+var textoCambiante = document.getElementsByClassName("invisiblePrice_moved");
+var arraySpan = document.getElementsByTagName("span");
+var arrayImg = document.getElementsByTagName("img");
+
 ////////////////////////////////////////////////////////////
 //      Limpieza de variables y cuadros de texto          //
 ////////////////////////////////////////////////////////////
+
 var limpiarTextArea = () =>
   (document.getElementById("textAreaFactura").value = "");
 var limpiarCestaCompra = () => {
@@ -51,17 +63,15 @@ var limpiarCestaCompra = () => {
 };
 
 ////////////////////////////////////////////////////////////
-//    Efectos sobre el cuadrado de Kg y sus transicione   //
+//    Efectos sobre el cuadrado de Kg y sus transiciones  //
 ////////////////////////////////////////////////////////////
-var arrayDivs = document.getElementsByClassName("frame");
-var inputs = document.getElementsByClassName("inputTextKG");
-var textoCambiante = document.getElementsByClassName("invisiblePrice_moved");
-var arraySpan = document.getElementsByTagName("span");
+
 var arrayAuxiliar=[false,false,false,false,false,false,false,false,false,false] 
+
 //Evitar un miniBug que hacia que se pudiera cambiar el TextoCambiante al hacer click
 //Sin este array con cada cambio en el input nos cambiaria el texto, así sabemos si ya lo ha cambiado o si no lo ha cambiado aun
 
-for(let i=0; i<10; i++){
+for(let i=0; i<inputs.length; i++){
   inputs[i].addEventListener("input", () =>{
     if(arrayAuxiliar[i]==false && inputs[i].value!=""){ 
       arrayAuxiliar[i]=true; 
@@ -92,3 +102,41 @@ function fadein(precio, i){
     textoCambiante[i].classList.remove('hide')
   }, 260);
 }
+////////////////////////////////////////////////////////////
+//      Iluminación y comprobación del click en img       //
+////////////////////////////////////////////////////////////
+
+for(let i=0; i<arrayImg.length; i++){
+  arrayImg[i].addEventListener("click",() => {
+    if(comprobarNumerico(inputs[i])){
+      cambioGradualColorFondoVerdeFrame(i);
+      //sumarCantidad
+    }else{
+      cambioGradualColorFondoRojoFrame(i);
+      inputs[i].value=0;
+    }
+  });
+}
+
+function cambioGradualColorFondoVerdeFrame(i) {
+  arrayDivs[i].classList.add("frame_clicked_green");
+  setTimeout(() => {
+    finalizarCambioColorVerdeClick(i);
+  }, 200);
+}
+function cambioGradualColorFondoRojoFrame(i) {
+  arraySpan[i].classList.add('show'); //mostrar texto "Kg"
+  arrayDivs[i].classList.add("frame_clicked_red");
+  setTimeout(() => {
+    finalizarCambioColorRojoClick(i);
+  }, 200);
+}
+function finalizarCambioColorVerdeClick(i) {
+  arrayDivs[i].classList.remove("frame_clicked_green");
+}
+function finalizarCambioColorRojoClick(i) {
+  arraySpan[i].classList.remove('show');
+  arrayDivs[i].classList.remove("frame_clicked_red");
+}
+
+
