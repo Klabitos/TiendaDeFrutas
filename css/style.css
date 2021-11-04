@@ -51,6 +51,7 @@ header h1 a{
     margin-right: 5%;
     border-radius: 13px;
     box-shadow: 1px 2px;
+    overflow-y: auto;
 }
 
 .frame{
@@ -145,7 +146,8 @@ p.hide{
     border: 1px solid black;
     text-align: center;  
     border-radius: 13px;  
-    box-shadow: 1px 2px;     
+    box-shadow: 1px 2px;
+    overflow-y: auto;     
 }
 
 #botonComprar{
@@ -176,5 +178,29 @@ p.hide{
 }
 
 .idFrutaRepetido{
-    background-color: blue;
+    border: 2px solid rgba(0, 0, 0, 0.637);
+    padding: 2%;
+    background-color: rgba(218, 181, 127, 0.588);
+    background-image: url(../img/flecha.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position-x: 20%;
+}
+
+@keyframes crecerDisminuir {
+    from {background-size: 16%;}
+    to {background-size: 18%;}
+  }
+
+.ultimaFrutaAdded{
+    border: 6px solid rgba(0, 0, 0, 0.637);
+    padding: 2%;
+    background-color: rgba(218, 181, 127, 0.588);
+    background-image: url(../img/flecha.png);
+    background-repeat: no-repeat;
+    background-position-x: 20%;
+    animation-name: crecerDisminuir;
+    animation-duration: 1s;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
 }

@@ -1,12 +1,7 @@
 "use strict";
 /*TODO 
 TRATAMIENTO DE ERRORES
-
 FUNCIONALIDAD-->
-
-PULSAR LA IMAGEN INTRODUCIRÁ LOS KILOS
---AL PULSAR EN FRUTA Y SOLO SI HAY MÁS DE 0 KILOS SE AÑADE LA FRUTA Y SUS KILOS , CON FONDO DE ALGÚN COLOR
---CADA FRUTA VA AÑADIENDO INFORMACIÓN
 --SE SUBRAYA CADA VEZ QUE SE HA AÑADIDO ESA FRUTA Y SDE QUITA EL SOMBREADO DE L AULTIMA AÑADIDA
 --TODO SE QUITA CUANDO SE ACABA EL PEDIDO
 --BOTON METE EN LA CAJA DE TEXTO LA COMPRA
@@ -101,7 +96,7 @@ function mostrarCompra() {
     "Precio medio: " + precioMedioKilo.toFixed(2) + " €" + "\n";
   limpiarCestaCompra();
 }
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //FUNCIONALIDAD DE AÑADIR KILOS Y MOSTRAR EN PANTALLA
 function addKilos(i){
   addKilosObjeto(i);
@@ -120,6 +115,7 @@ function addEnPantallita(i){
   let zonaLateral = document.getElementsByClassName("zonaLateral")[0]
   elementoAdd.innerText=`${cestaCompra[i].kilosVez} kg de ${cestaCompra[i].nombre} `;
   elementoAdd.classList.add(`idFruta${i}`);
+  //EFECTO PARA LA RECIÉN AÑADIDA SOLO ULTIMA
   zonaLateral.appendChild(elementoAdd);
 }
 function restablecerKilosACero(i){
@@ -129,25 +125,39 @@ function restablecerKilosACero(i){
   arraySpan[i].classList.remove('show');
   arrayAuxiliar[i]=false;
 }
+
+//visuales de recien añadir
 function retirarIluminacionClases(){
   let elementosIluminados = document.getElementsByClassName("idFrutaRepetido");
-  for(let z=0; z<elementosIluminados.length; z++){
+  for(let z=0; z<elementosIluminados.length; z++){ //No hace falta -1 por el "Bug" que arreglamos con el HOTFIX de que el length disminuye
     elementosIluminados[z].classList.remove("idFrutaRepetido");
     z--; //HOT FIX para solucionar que cada vez que elimino la clase la variable disminuye su LENGTH
     //Esto hace que el bucle no funcione bien puesto que cuando va a leer el elemento 2 este es el 1, y asi en cada iteración.
     //El length baja en cada iteración
   }
+  quitarIluminaciónLastAdded();
 }
-function iluminarMismaClase(i){
-  let elementosMismaClase = document.getElementsByClassName(`idFruta${i}`);
-  for(let j=0; j<elementosMismaClase.length; j++){
-    elementosMismaClase[j].classList.add("idFrutaRepetido");
+function quitarIluminaciónLastAdded(){
+  let ultimoElemento=false;
+  if(ultimoElemento = document.getElementsByClassName("ultimaFrutaAdded")[0]){
+    ultimoElemento.classList.remove("ultimaFrutaAdded");
   }
 }
 
+function iluminarMismaClase(i){
+  let elementosMismaClase = document.getElementsByClassName(`idFruta${i}`);
+  for(let j=0; j<elementosMismaClase.length-1; j++){ // -1 porque no queremos la más reciente
+    elementosMismaClase[j].classList.add("idFrutaRepetido"); //A todas sus hermanas
+  }
+  iluminarRecienAdded(elementosMismaClase);
+}
+function iluminarRecienAdded(elementosMismaClase){
+  elementosMismaClase[elementosMismaClase.length-1].classList.add("ultimaFrutaAdded"); //Solo a la que se acaba de introducir
+}
 
 
-//ERRORES
+//////////////////////////////////////////////////////////////////////////ERRORES 
+//TODO fixear para que quite el cero y no te lo anule
 function libreDeErrorCeroDelanteNumero(numero){
   if(numero.toString()[0]==0 && numero.toString()[1]!="."){
     console.error("Comenzar con un número en 0 puede ocasionar problemas, evítalo, por favor.")
