@@ -110,16 +110,22 @@ function fadein(precio, i){
 
 for(let i=0; i<arrayImg.length; i++){
   arrayImg[i].addEventListener("click",() => {
-    if(comprobarNumerico(inputs[i])){
+    if(comprobarNumerico(inputs[i],i)){
       cambioGradualColorFondoVerdeFrame(i);
-      //sumarCantidad
+      addKilos(i);
     }else{
       cambioGradualColorFondoRojoFrame(i);
-      inputs[i].value=0;
+      inputs[i].value="";
     }
   });
 }
-
+function comprobarNumerico(elemento, i){
+  if(isNaN(elemento.value) || elemento.value=="" || elemento.value<=0){
+    return false;
+  }else{
+    return libreDeErrorCeroDelanteNumero(elemento.value); //Para que no comience en 0
+  }
+}
 function cambioGradualColorFondoVerdeFrame(i) {
   arrayDivs[i].classList.add("frame_clicked_green");
   setTimeout(() => {

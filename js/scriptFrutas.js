@@ -102,9 +102,55 @@ function mostrarCompra() {
   limpiarCestaCompra();
 }
 
+//FUNCIONALIDAD DE AÑADIR KILOS Y MOSTRAR EN PANTALLA
+function addKilos(i){
+  addKilosObjeto(i);
+  addEnPantallita(i);
+  restablecerKilosACero(i);
+  retirarIluminacionClases();
+  iluminarMismaClase(i);
+}
 
-function comprobarNumerico(elemento){
-  if(isNaN(elemento.value) || elemento.value=="" || elemento.value<=0){
+function addKilosObjeto(i){
+  cestaCompra[i].kilosTotales+=inputs[i].value;
+  cestaCompra[i].kilosVez=inputs[i].value;
+}
+function addEnPantallita(i){
+  let elementoAdd = document.createElement("p");
+  let zonaLateral = document.getElementsByClassName("zonaLateral")[0]
+  elementoAdd.innerText=`${cestaCompra[i].kilosVez} kg de ${cestaCompra[i].nombre} `;
+  elementoAdd.classList.add(`idFruta${i}`);
+  zonaLateral.appendChild(elementoAdd);
+}
+function restablecerKilosACero(i){
+  inputs[i].value="";
+  //Cambios visuales
+  textoCambiante[i].textContent="Introduce Kg";
+  arraySpan[i].classList.remove('show');
+  arrayAuxiliar[i]=false;
+}
+function retirarIluminacionClases(){
+  let elementosIluminados = document.getElementsByClassName("idFrutaRepetido");
+  for(let z=0; z<elementosIluminados.length; z++){
+    elementosIluminados[z].classList.remove("idFrutaRepetido");
+    z--; //HOT FIX para solucionar que cada vez que elimino la clase la variable disminuye su LENGTH
+    //Esto hace que el bucle no funcione bien puesto que cuando va a leer el elemento 2 este es el 1, y asi en cada iteración.
+    //El length baja en cada iteración
+  }
+}
+function iluminarMismaClase(i){
+  let elementosMismaClase = document.getElementsByClassName(`idFruta${i}`);
+  for(let j=0; j<elementosMismaClase.length; j++){
+    elementosMismaClase[j].classList.add("idFrutaRepetido");
+  }
+}
+
+
+
+//ERRORES
+function libreDeErrorCeroDelanteNumero(numero){
+  if(numero.toString()[0]==0 && numero.toString()[1]!="."){
+    console.error("Comenzar con un número en 0 puede ocasionar problemas, evítalo, por favor.")
     return false;
   }else{
     return true;

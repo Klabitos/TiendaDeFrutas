@@ -40,6 +40,7 @@ header h1 a{
     
 }
 .zonaLateral{
+    text-align: center;
     width: 25%;
     height: 85%;
     padding: 1%;
@@ -165,9 +166,15 @@ p.hide{
 
 }
 
+/* CLASES FRUTAAAAAAAAAAAAAAAAAS */
+
 .negrita{
     font-weight: bold;
 }
 .subrayado{
     text-decoration: underline;
+}
+
+.idFrutaRepetido{
+    background-color: blue;
 }
