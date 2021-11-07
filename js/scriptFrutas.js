@@ -50,11 +50,11 @@ function mostrarCompra() { //falta redondear hacia abajo
   cestaFiltrada = ordenarCestaCompra(cestaFiltrada);
   diaHora(textAreaElement);
   for (let i=0; i<cestaFiltrada.length; i++) {
-    textAreaElement.value+=`${cestaFiltrada[i].nombre} ---- ${cestaFiltrada[i].kilosTotales} ${kilo_or_kilos(cestaFiltrada[i].kilosTotales)} ---- ${cestaFiltrada[i].precio}€ ---- ${(cestaFiltrada[i].precio*cestaFiltrada[i].kilosTotales).toFixed(2)}€ \n`
+    textAreaElement.value+=`${cestaFiltrada[i].nombre} ---- ${cestaFiltrada[i].kilosTotales} ${kilo_or_kilos(cestaFiltrada[i].kilosTotales)} ---- ${cestaFiltrada[i].precio}€ ---- ${formatNumber(cestaFiltrada[i].precio*cestaFiltrada[i].kilosTotales)}€ \n`
     console.log(i)
   }
   valorPrecioTotal=precioTotal(cestaFiltrada);
-  textAreaElement.value+=`\nPrecio total: ${precioTotal(cestaFiltrada).toFixed(2)}€\nPrecioMedio: ${precioMedio(cestaFiltrada, valorPrecioTotal).toFixed(2)}€/kg`;
+  textAreaElement.value+=`\nPrecio total: ${formatNumber(precioTotal(cestaFiltrada))}€\nPrecioMedio: ${formatNumber(precioMedio(cestaFiltrada, valorPrecioTotal))}€/kg`;
   limpiarCestaCompra();
 }
 
@@ -81,6 +81,18 @@ function precioMedio(cestaFiltrada,precioTotal){
   };
   let precioMedio=precioTotal/kilosTotales();
   return precioMedio;
+}
+function formatNumber(x) {
+  // Lo hacemos String
+  var s = "" + x;
+  // Añadimos el punto si no lo tiene 
+  if (s.indexOf(".") == -1) {
+    s += ".";
+  }
+  //Añade 2 ceros por si fuera entero (Si sobran no pasa nada)
+  s += "00";
+  // Cogemos los dos decimales primeros (como es redondeo hacia abajo nunca cambian)
+  return s.substring(0, s.indexOf(".") + 3);
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //FUNCIONALIDAD DE AÑADIR KILOS Y MOSTRAR EN PANTALLA
