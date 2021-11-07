@@ -10,33 +10,33 @@ class Fruit{
       this.kilosVez = kilosVez;
       this.kilosTotales = kilosTotales;
     }
-  }
-  class WinterFruit extends Fruit{
-    constructor(nombre, precio, kilosVez, kilosTotales, conservarNevera){
-      super(nombre, precio, kilosVez, kilosTotales);
-      this.conservarNevera = conservarNevera;
+}
+class WinterFruit extends Fruit{
+  constructor(nombre, precio, kilosVez, kilosTotales, conservarNevera){
+    super(nombre, precio, kilosVez, kilosTotales);
+    this.conservarNevera = conservarNevera;
       
-    }
   }
-  class SummerFruit extends Fruit{
-    constructor(nombre, precio, kilosVez, kilosTotales, proximidad, region){ //Son o no son de proximidad //Region=lugar
-      super(nombre, precio, kilosVez, kilosTotales);
-      this.proximidad = proximidad;
-      this.region = region;
-    }
+}
+class SummerFruit extends Fruit{
+  constructor(nombre, precio, kilosVez, kilosTotales, proximidad, region){ //Son o no son de proximidad //Region=lugar
+    super(nombre, precio, kilosVez, kilosTotales);
+    this.proximidad = proximidad;
+    this.region = region;
   }
-  var kiwi = new WinterFruit("Kiwi",parseFloat(document.getElementById("precioKiwi").placeholder),0,0,false);
-  var pera = new WinterFruit("Pera",parseFloat(document.getElementById("precioPera").placeholder),0,0,false);
-  var manzana = new WinterFruit("Manzana",parseFloat(document.getElementById("precioManzana").placeholder),0,0,false);
-  var platano = new WinterFruit("Plátano",parseFloat(document.getElementById("precioPlatano").placeholder),0,0,false);
-  var mandarina = new SummerFruit("Mandarina",parseFloat(document.getElementById("precioMandarina").placeholder),0,0,false,"Salamanca");
-  var naranja = new SummerFruit("Naranja",parseFloat(document.getElementById("precioNaranja").placeholder),0,0,false,"Palencia");
-  var melon = new SummerFruit("Melón",parseFloat(document.getElementById("precioMelon").placeholder),0,0,false,"Huelva");
-  var sandia = new SummerFruit("Sandía",parseFloat(document.getElementById("precioSandia").placeholder),0,0,false,"Canarias");
-  var pinna = new SummerFruit("Piña",parseFloat(document.getElementById("precioPinna").placeholder),0,0,false,"Macondo");
-  var limon = new WinterFruit("Limón",parseFloat(document.getElementById("precioLimon").placeholder),0,0,true);
+}
+var kiwi = new WinterFruit("Kiwi",parseFloat(document.getElementById("precioKiwi").placeholder),0,0,false);
+var pera = new WinterFruit("Pera",parseFloat(document.getElementById("precioPera").placeholder),0,0,false);
+var manzana = new WinterFruit("Manzana",parseFloat(document.getElementById("precioManzana").placeholder),0,0,false);
+var platano = new WinterFruit("Plátano",parseFloat(document.getElementById("precioPlatano").placeholder),0,0,false);
+var mandarina = new SummerFruit("Mandarina",parseFloat(document.getElementById("precioMandarina").placeholder),0,0,false,"Salamanca");
+var naranja = new SummerFruit("Naranja",parseFloat(document.getElementById("precioNaranja").placeholder),0,0,false,"Palencia");
+var melon = new SummerFruit("Melón",parseFloat(document.getElementById("precioMelon").placeholder),0,0,false,"Huelva");
+var sandia = new SummerFruit("Sandía",parseFloat(document.getElementById("precioSandia").placeholder),0,0,false,"Canarias");
+var pinna = new SummerFruit("Piña",parseFloat(document.getElementById("precioPinna").placeholder),0,0,false,"Macondo");
+var limon = new WinterFruit("Limón",parseFloat(document.getElementById("precioLimon").placeholder),0,0,true);
   //Almacena todos los productos
-  var cestaCompra = [kiwi, pera, manzana, platano, mandarina, naranja, melon, sandia, pinna, limon];
+var cestaCompra = [kiwi, pera, manzana, platano, mandarina, naranja, melon, sandia, pinna, limon];
   
 /////////////////////////////////////////////////////////////
 // Arrays con todos los elementos importantes de la página //

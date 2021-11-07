@@ -1,34 +1,12 @@
 "use strict";
 /*TODO 
-TRATAMIENTO DE ERRORES
 FUNCIONALIDAD-->
---SE SUBRAYA CADA VEZ QUE SE HA AÑADIDO ESA FRUTA Y SDE QUITA EL SOMBREADO DE L AULTIMA AÑADIDA
 --TODO SE QUITA CUANDO SE ACABA EL PEDIDO
---BOTON METE EN LA CAJA DE TEXTO LA COMPRA
-----1 LINEA CON FECHA Y HORA DE LA FINALIZACIÓN DEL PEDIDO
-----CADA TIPO DE FRUTA APARECERÁ SOLO 1 VEZ CON TODOS LOS KILOS
-----ORDEN ALFABETICO INVERSO
 --- PRECIO FINAL, DOS DECIMINALES REDONDEADO HACIA ABAJO
-
-Fecha de compra: DD/MM/AAAA HH:MM 
-Peras ---- 1 kilo --- 1,45€ -- 1,45€ 
-Naranjas ---- 2 kilos --- 1,35€ -- 2,70€ 
-Manzanas ---- 5 kilos --- 1,19€ -- 5,95€ 
-... ---- ... 
-Precio total : xx € 
-Precio medio: xx €/kg
-
-
 -----MOSTRAR VENTANA EMERGENTE CON TODA LA INFO DE VERANO O INVIERNO
+//reloj cuidado cuando es solo 1 min, 07 por ejemploi
 -----TRAS LA FINALIZACIÓN DE UN PEDIDO Y A LOS 10 SEGUNDOS SE LIMPIA LA BARRA LATERAL, EL AREA DONDE SE MUESTRA LA COMPRA Y CUALQUIER VARIABLE INTERNA
-  
 */
-
-
-
-
-
-
 
 
 function re_start() {
@@ -38,11 +16,6 @@ function re_start() {
 }
 
 
-//Funcionalidad básica de modificar y preparar la web
-var addUnKiloAFrutaPorID = (ID_FrutaPosicionCestaCompra) => {
-  cestaCompra[ID_FrutaPosicionCestaCompra][2]++;
-};
-
 
 //Onload
 
@@ -50,8 +23,8 @@ var addUnKiloAFrutaPorID = (ID_FrutaPosicionCestaCompra) => {
 function ordenarCestaCompra(cesta) {
   
   let cestaCompraOrdenadaAlfabeticamente = cesta.sort(function(a,b){
-    if(a.nombre < b.nombre) { return -1; }
-    if(a.nombre > b.nombre) { return 1; }
+    if(a.nombre < b.nombre) { return 1; }
+    if(a.nombre > b.nombre) { return -1; }
     return 0;
   });
   return cestaCompraOrdenadaAlfabeticamente;
@@ -61,40 +34,53 @@ function ordenarCestaCompra(cesta) {
 // // //Para saber si tiene que ecribir kilos en singular o plurar /////////////////////////// UTILITIES
 var kilo_or_kilos = (num) => (num <= 1 ? "kilo" : "kilos");
 
-function mostrarCompra() {
-  let texAreaElement = document.getElementById("textAreaFactura");
-  let precioTotal = 0;
-  let kilos = 0;
-  let precioMedioKilo = 0;
-  let cestaCompraDatosTratados = [];
+
+////////////////////////////////////////////Mostrar compra 
+/*
+var botonCompra = document.getElementById("botonComprar");
+botonCompra.addEventListener("click", console.log("enga"));
+*/
+
+
+function mostrarCompra() { //falta redondear hacia abajo
   limpiarTextArea();
-  //TODO ORDENAR BIEN
-  cestaCompraDatosTratados = ordenarCestaCompra(cestaCompra);
-  cestaCompraDatosTratados = cestaCompraDatosTratados.filter((fruta) => fruta[2] != 0); //Eliminar elementos con 0 kilos
-  
-
-  texAreaElement.value += "\n";
-  texAreaElement.value += "-------------------\n";
-
-  for (let i = 0; i < cestaCompraDatosTratados.length; i++) {
-    texAreaElement.value +=
-      cestaCompraDatosTratados[i].nombre +
-      "  --- " +
-      cestaCompraDatosTratados[i][2] +
-      " " +
-      kilo_or_kilos(cestaCompraDatosTratados[i][2]) +
-      "\n";
-    precioTotal +=
-      cestaCompraDatosTratados[i][2] * cestaCompraDatosTratados[i][1];
-    kilos += cestaCompraDatosTratados[i][2];
+  let valorPrecioTotal;
+  let textAreaElement = document.getElementById("textAreaFactura");
+  let cestaFiltrada = cestaCompra.filter((fruta) => fruta.kilosTotales != 0);
+  cestaFiltrada = ordenarCestaCompra(cestaFiltrada);
+  diaHora(textAreaElement);
+  for (let i=0; i<cestaFiltrada.length; i++) {
+    textAreaElement.value+=`${cestaFiltrada[i].nombre} ---- ${cestaFiltrada[i].kilosTotales} ${kilo_or_kilos(cestaFiltrada[i].kilosTotales)} ---- ${cestaFiltrada[i].precio}€ ---- ${(cestaFiltrada[i].precio*cestaFiltrada[i].kilosTotales).toFixed(2)}€ \n`
+    console.log(i)
   }
-  precioMedioKilo = precioTotal / kilos;
-  texAreaElement.value += "-------------------\n";
-  texAreaElement.value +=
-    "Precio total: " + precioTotal.toFixed(2) + " €" + "\n";
-  texAreaElement.value +=
-    "Precio medio: " + precioMedioKilo.toFixed(2) + " €" + "\n";
+  valorPrecioTotal=precioTotal(cestaFiltrada);
+  textAreaElement.value+=`\nPrecio total: ${precioTotal(cestaFiltrada).toFixed(2)}€\nPrecioMedio: ${precioMedio(cestaFiltrada, valorPrecioTotal).toFixed(2)}€/kg`;
   limpiarCestaCompra();
+}
+
+function diaHora(textAreaElement){
+var today = new Date();
+var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+var time = today.getHours() + ":" + today.getMinutes();
+textAreaElement.value+=`Fecha de compra: ${date} ${time}\n\n`
+}
+function precioTotal(cestaFiltrada){
+  let precioTotal=0;
+  for(let i=0; i<cestaFiltrada.length; i++){
+    precioTotal+=Number(cestaFiltrada[i].kilosTotales*cestaFiltrada[i].precio);
+  }
+  return precioTotal;
+}
+function precioMedio(cestaFiltrada,precioTotal){
+  let kilosTotales=()=>{
+    let  kilos = 0;
+    for(let i=0; i<cestaFiltrada.length;i++){
+      kilos+=Number(cestaFiltrada[i].kilosTotales)
+    }
+    return kilos;
+  };
+  let precioMedio=precioTotal/kilosTotales();
+  return precioMedio;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //FUNCIONALIDAD DE AÑADIR KILOS Y MOSTRAR EN PANTALLA
@@ -107,8 +93,8 @@ function addKilos(i){
 }
 
 function addKilosObjeto(i){
-  cestaCompra[i].kilosTotales+=inputs[i].value;
-  cestaCompra[i].kilosVez=inputs[i].value;
+  cestaCompra[i].kilosTotales+=Number(inputs[i].value);
+  cestaCompra[i].kilosVez=Number(inputs[i].value);
 }
 function addEnPantallita(i){
   let elementoAdd = document.createElement("p");
