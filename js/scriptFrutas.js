@@ -2,7 +2,6 @@
 /*TODO 
 FUNCIONALIDAD-->
 --TODO SE QUITA CUANDO SE ACABA EL PEDIDO
---- PRECIO FINAL, DOS DECIMINALES REDONDEADO HACIA ABAJO
 -----MOSTRAR VENTANA EMERGENTE CON TODA LA INFO DE VERANO O INVIERNO
 //reloj cuidado cuando es solo 1 min, 07 por ejemploi
 -----TRAS LA FINALIZACIÓN DE UN PEDIDO Y A LOS 10 SEGUNDOS SE LIMPIA LA BARRA LATERAL, EL AREA DONDE SE MUESTRA LA COMPRA Y CUALQUIER VARIABLE INTERNA
@@ -10,9 +9,9 @@ FUNCIONALIDAD-->
 
 
 function re_start() {
-  //limpiarAreaDerechaInmediatamente
   limpiarTextArea();
   limpiarCestaCompra();
+  limpiarZonaLateral();
 }
 
 
@@ -54,15 +53,16 @@ function mostrarCompra() { //falta redondear hacia abajo
     console.log(i)
   }
   valorPrecioTotal=precioTotal(cestaFiltrada);
-  textAreaElement.value+=`\nPrecio total: ${formatNumber(precioTotal(cestaFiltrada))}€\nPrecioMedio: ${formatNumber(precioMedio(cestaFiltrada, valorPrecioTotal))}€/kg`;
+  textAreaElement.value+=`\nPrecio total: ${formatNumber(precioTotal(cestaFiltrada))}€\nPrecio medio: ${formatNumber(precioMedio(cestaFiltrada, valorPrecioTotal))}€/kg`;
   limpiarCestaCompra();
+  //limpiarZonaLateral();
 }
 
 function diaHora(textAreaElement){
 var today = new Date();
 var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 var time = today.getHours() + ":" + today.getMinutes();
-textAreaElement.value+=`Fecha de compra: ${date} ${time}\n\n`
+textAreaElement.value+=`Fecha de compra: ${date} a las ${time}\n\n`
 }
 function precioTotal(cestaFiltrada){
   let precioTotal=0;
@@ -72,6 +72,7 @@ function precioTotal(cestaFiltrada){
   return precioTotal;
 }
 function precioMedio(cestaFiltrada,precioTotal){
+  let precioMedio = 0;
   let kilosTotales=()=>{
     let  kilos = 0;
     for(let i=0; i<cestaFiltrada.length;i++){
@@ -79,8 +80,8 @@ function precioMedio(cestaFiltrada,precioTotal){
     }
     return kilos;
   };
-  let precioMedio=precioTotal/kilosTotales();
-  return precioMedio;
+  precioMedio=precioTotal/kilosTotales();
+  return isNaN(precioMedio)?0:precioMedio;
 }
 function formatNumber(x) {
   // Lo hacemos String

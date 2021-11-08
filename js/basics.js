@@ -57,10 +57,17 @@ var limpiarTextArea = () =>
 var limpiarCestaCompra = () => {
   cestaCompra = [kiwi, pera, manzana, platano, mandarina, naranja, melon, sandia, pinna, limon]; //Volvemos a ordenar
   cestaCompra.map((cesta) => { //Vaciamos los kilos totales y relativos
-    (cesta[2] = 0);
-    (cesta[3] = 0) 
+    (cesta.kilosTotales = 0);
+    (cesta.kilosVez = 0) 
   });
 };
+var limpiarZonaLateral= () =>{ //TODO
+  let zonaLateral = document.getElementsByClassName("zonaLateral")[0];
+  let elementoAEliminar=zonaLateral.getElementsByTagName("p");
+  for(let i=0; i<zonaLateral.childElementCount; i++){
+    elementoAEliminar.remove();
+  }
+}
 
 ////////////////////////////////////////////////////////////
 //    Efectos sobre el cuadrado de Kg y sus transiciones  //
