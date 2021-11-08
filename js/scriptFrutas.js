@@ -49,11 +49,11 @@ function mostrarCompra() { //falta redondear hacia abajo
   cestaFiltrada = ordenarCestaCompra(cestaFiltrada);
   diaHora(textAreaElement);
   for (let i=0; i<cestaFiltrada.length; i++) {
-    textAreaElement.value+=`${cestaFiltrada[i].nombre} ---- ${cestaFiltrada[i].kilosTotales} ${kilo_or_kilos(cestaFiltrada[i].kilosTotales)} ---- ${cestaFiltrada[i].precio}€ ---- ${formatNumber(cestaFiltrada[i].precio*cestaFiltrada[i].kilosTotales)}€ \n`
+    textAreaElement.value+=`${cestaFiltrada[i].nombre} ---- ${cestaFiltrada[i].kilosTotales} ${kilo_or_kilos(cestaFiltrada[i].kilosTotales)} ---- ${cestaFiltrada[i].precio}€ ---- ${formatNumber(cestaFiltrada[i].precio*cestaFiltrada[i].kilosTotales,2)}€ \n`
     console.log(i)
   }
   valorPrecioTotal=precioTotal(cestaFiltrada);
-  textAreaElement.value+=`\nPrecio total: ${formatNumber(precioTotal(cestaFiltrada))}€\nPrecio medio: ${formatNumber(precioMedio(cestaFiltrada, valorPrecioTotal))}€/kg`;
+  textAreaElement.value+=`\nPrecio total: ${formatNumber(precioTotal(cestaFiltrada),2)}€\nPrecio medio: ${formatNumber(precioMedio(cestaFiltrada, valorPrecioTotal),3)}€/kg`;
   limpiarCestaCompra();
   //limpiarZonaLateral();
 }
@@ -83,17 +83,19 @@ function precioMedio(cestaFiltrada,precioTotal){
   precioMedio=precioTotal/kilosTotales();
   return isNaN(precioMedio)?0:precioMedio;
 }
-function formatNumber(x) {
+function formatNumber(num, decimales) {
   // Lo hacemos String
-  var s = "" + x;
+  var s = "" + num;
   // Añadimos el punto si no lo tiene 
   if (s.indexOf(".") == -1) {
     s += ".";
   }
   //Añade 2 ceros por si fuera entero (Si sobran no pasa nada)
-  s += "00";
+  for(let i=0; i<=decimales; i++){
+    s += "0";
+  }
   // Cogemos los dos decimales primeros (como es redondeo hacia abajo nunca cambian)
-  return s.substring(0, s.indexOf(".") + 3);
+  return s.substring(0, s.indexOf(".") + decimales+1);
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //FUNCIONALIDAD DE AÑADIR KILOS Y MOSTRAR EN PANTALLA
