@@ -1,26 +1,24 @@
 "use strict";
 /*TODO 
 FUNCIONALIDAD-->
---TODO SE QUITA CUANDO SE ACABA EL PEDIDO
 -----MOSTRAR VENTANA EMERGENTE CON TODA LA INFO DE VERANO O INVIERNO
 //reloj cuidado cuando es solo 1 min, 07 por ejemploi
------TRAS LA FINALIZACIÓN DE UN PEDIDO Y A LOS 10 SEGUNDOS SE LIMPIA LA BARRA LATERAL, EL AREA DONDE SE MUESTRA LA COMPRA Y CUALQUIER VARIABLE INTERNA
 */
 
-
+////////////////////////////////////////////////////////////
+//      On load         //
+////////////////////////////////////////////////////////////
 function re_start() {
-  limpiarTextArea();
-  limpiarCestaCompra();
   limpiarZonaLateral();
+  limpiarCestaCompra();
+  limpiarTextArea();
 }
 
+////////////////////////////////////////////////////////////
+//      Utils (ordenar/plural_singular)      //
+////////////////////////////////////////////////////////////
 
-
-//Onload
-
-//Funciones para tratar el array de cestaCompra
 function ordenarCestaCompra(cesta) {
-  
   let cestaCompraOrdenadaAlfabeticamente = cesta.sort(function(a,b){
     if(a.nombre < b.nombre) { return 1; }
     if(a.nombre > b.nombre) { return -1; }
@@ -29,23 +27,20 @@ function ordenarCestaCompra(cesta) {
   return cestaCompraOrdenadaAlfabeticamente;
 }
 
-
-// // //Para saber si tiene que ecribir kilos en singular o plurar /////////////////////////// UTILITIES
 var kilo_or_kilos = (num) => (num <= 1 ? "kilo" : "kilos");
 
 
-////////////////////////////////////////////Mostrar compra 
-/*
-var botonCompra = document.getElementById("botonComprar");
-botonCompra.addEventListener("click", console.log("enga"));
-*/
+////////////////////////////////////////////////////////////
+//      Limpieza de variables y cuadros de texto          //
+////////////////////////////////////////////////////////////
 
-
-function mostrarCompra() { //falta redondear hacia abajo
+function mostrarCompra() { 
   limpiarTextArea();
+
   let valorPrecioTotal;
   let textAreaElement = document.getElementById("textAreaFactura");
   let cestaFiltrada = cestaCompra.filter((fruta) => fruta.kilosTotales != 0);
+
   cestaFiltrada = ordenarCestaCompra(cestaFiltrada);
   diaHora(textAreaElement);
   for (let i=0; i<cestaFiltrada.length; i++) {
@@ -63,6 +58,7 @@ var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 var time = today.getHours() + ":" + today.getMinutes();
 textAreaElement.value+=`Fecha de compra: ${date} a las ${time}\n\n`
 }
+
 function precioTotal(cestaFiltrada){
   let precioTotal=0;
   for(let i=0; i<cestaFiltrada.length; i++){
@@ -70,6 +66,7 @@ function precioTotal(cestaFiltrada){
   }
   return precioTotal;
 }
+
 function precioMedio(cestaFiltrada,precioTotal){
   let precioMedio = 0;
   let kilosTotales=()=>{
@@ -83,21 +80,20 @@ function precioMedio(cestaFiltrada,precioTotal){
   return isNaN(precioMedio)?0:precioMedio;
 }
 function formatNumber(num, decimales) {
-  // Lo hacemos String
-  var s = "" + num;
-  // Añadimos el punto si no lo tiene 
-  if (s.indexOf(".") == -1) {
+  var s = "" + num; // Lo hacemos String
+  if (s.indexOf(".") == -1) { // Añadimos el punto si no lo tiene 
     s += ".";
   }
-  //Añade 2 ceros por si fuera entero (Si sobran no pasa nada)
-  for(let i=0; i<=decimales; i++){
+  for(let i=0; i<=decimales; i++){ //Añade ceros como decimales se quieran (mínimo)
     s += "0";
   }
-  // Cogemos los dos decimales primeros (como es redondeo hacia abajo nunca cambian)
-  return s.substring(0, s.indexOf(".") + decimales+1);
+  return s.substring(0, s.indexOf(".") + decimales+1); // Cogemos los decimales+1 primeros (como es redondeo hacia abajo nunca cambian)
 }
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//FUNCIONALIDAD DE AÑADIR KILOS Y MOSTRAR EN PANTALLA
+
+////////////////////////////////////////////////////////////
+//   Funcionalidad de añadir kilos y mostrar en pantalla  //
+////////////////////////////////////////////////////////////
+
 function addKilos(i){
   addKilosObjeto(i);
   addEnPantallita(i);
@@ -115,7 +111,7 @@ function addEnPantallita(i){
   let zonaLateral = document.getElementsByClassName("zonaLateral")[0]
   elementoAdd.innerText=`${cestaCompra[i].kilosVez} kg de ${cestaCompra[i].nombre} `;
   elementoAdd.classList.add(`idFruta${i}`);
-  //EFECTO PARA LA RECIÉN AÑADIDA SOLO ULTIMA
+  //Efecto para la ultima recien añadida unicamente
   zonaLateral.appendChild(elementoAdd);
 }
 function restablecerKilosACero(i){
@@ -125,8 +121,10 @@ function restablecerKilosACero(i){
   arraySpan[i].classList.remove('show');
   arrayAuxiliar[i]=false;
 }
+ //////////////////////////////////////////////////
+ ////      Cambios visuales para la zona lateral             
+ //////////////////////////////////////////////////
 
-//visuales de recien añadir
 function retirarIluminacionClases(){
   let elementosIluminados = document.getElementsByClassName("idFrutaRepetido");
   for(let z=0; z<elementosIluminados.length; z++){ //No hace falta -1 por el "Bug" que arreglamos con el HOTFIX de que el length disminuye
@@ -156,7 +154,9 @@ function iluminarRecienAdded(elementosMismaClase){
 }
 
 
-//////////////////////////////////////////////////////////////////////////ERRORES 
+/////////////////////////////////////////////////////////////
+//              Tratamiento de errores                     //
+////////////////////////////////////////////////////////////
 //TODO fixear para que quite el cero y no te lo anule
 function libreDeErrorCeroDelanteNumero(numero){
   if(numero.toString()[0]==0 && numero.toString()[1]!="."){
