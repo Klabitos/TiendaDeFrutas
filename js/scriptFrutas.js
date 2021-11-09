@@ -31,7 +31,7 @@ var kilo_or_kilos = (num) => (num <= 1 ? "kilo" : "kilos");
 
 
 ////////////////////////////////////////////////////////////
-//      Limpieza de variables y cuadros de texto          //
+//                !!!! Mostrar compra !!!!                //
 ////////////////////////////////////////////////////////////
 
 function mostrarCompra() { 
@@ -89,6 +89,16 @@ function formatNumber(num, decimales) {
   }
   return s.substring(0, s.indexOf(".") + decimales+1); // Cogemos los decimales+1 primeros (como es redondeo hacia abajo nunca cambian)
 }
+
+////////////////////////////////////////////////////////////
+//                Crear nueva ventana con info            //
+////////////////////////////////////////////////////////////
+
+function crearVentana(){
+  let ventana = window.open("","Información Extra","toolbar=no");
+  ventana.document.getElementById...
+}
+
 
 ////////////////////////////////////////////////////////////
 //   Funcionalidad de añadir kilos y mostrar en pantalla  //
