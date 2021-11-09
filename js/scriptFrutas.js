@@ -50,12 +50,11 @@ function mostrarCompra() { //falta redondear hacia abajo
   diaHora(textAreaElement);
   for (let i=0; i<cestaFiltrada.length; i++) {
     textAreaElement.value+=`${cestaFiltrada[i].nombre} ---- ${cestaFiltrada[i].kilosTotales} ${kilo_or_kilos(cestaFiltrada[i].kilosTotales)} ---- ${cestaFiltrada[i].precio}€ ---- ${formatNumber(cestaFiltrada[i].precio*cestaFiltrada[i].kilosTotales,2)}€ \n`
-    console.log(i)
   }
   valorPrecioTotal=precioTotal(cestaFiltrada);
   textAreaElement.value+=`\nPrecio total: ${formatNumber(precioTotal(cestaFiltrada),2)}€\nPrecio medio: ${formatNumber(precioMedio(cestaFiltrada, valorPrecioTotal),3)}€/kg`;
-  limpiarCestaCompra();
-  //limpiarZonaLateral();
+
+  limpiarTimer();
 }
 
 function diaHora(textAreaElement){

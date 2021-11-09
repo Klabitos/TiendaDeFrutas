@@ -65,8 +65,17 @@ var limpiarZonaLateral= () =>{ //TODO
   let zonaLateral = document.getElementsByClassName("zonaLateral")[0];
   let elementoAEliminar=zonaLateral.getElementsByTagName("p");
   for(let i=0; i<zonaLateral.childElementCount; i++){
-    elementoAEliminar.remove();
+    elementoAEliminar[i].remove();
+    i--;
   }
+}
+
+var limpiarTimer=() =>{
+  setTimeout(function(){
+    limpiarZonaLateral();
+    limpiarCestaCompra();
+    limpiarTextArea();
+  },10000);
 }
 
 ////////////////////////////////////////////////////////////
