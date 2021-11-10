@@ -48,6 +48,7 @@ function mostrarCompra() {
   }
   valorPrecioTotal=precioTotal(cestaFiltrada);
   textAreaElement.value+=`\nPrecio total: ${formatNumber(precioTotal(cestaFiltrada),2)}€\nPrecio medio: ${formatNumber(precioMedio(cestaFiltrada, valorPrecioTotal),3)}€/kg`;
+  crearVentana(cestaFiltrada);
 
   limpiarTimer();
 }
@@ -94,10 +95,21 @@ function formatNumber(num, decimales) {
 //                Crear nueva ventana con info            //
 ////////////////////////////////////////////////////////////
 
-function crearVentana(){
-  let ventana = window.open("","Información Extra","toolbar=no");
-  ventana.document.getElementById...
+function crearVentana(cestaFiltrada){
+  let ventana = window.open("./informacion.html","Información Extra","toolbar=no, location=no,width=500, height=500");
+  ventana.moveBy(screen.width/4+(screen.width/4)/2,screen.height/4); //Se centra la ventana
+  ventana.addEventListener("load", () => {
+    let elementoDiv=ventana.document.getElementById("introducirInformacion");
+    for(let i=0; i<cestaFiltrada.length; i++){
+      let parrafo=document.createElement("p");
+      parrafo.innerText="Bentxo";
+      elementoDiv.appendChild(parrafo);
+    }
+    
+
+  });
 }
+ 
 
 
 ////////////////////////////////////////////////////////////

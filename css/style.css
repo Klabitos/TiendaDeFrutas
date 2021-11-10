@@ -6,6 +6,7 @@ html{
     font-family: 'Noto Sans TC', sans-serif;
 }
 
+
 body{
     height: 100%;
 }
@@ -204,4 +205,23 @@ p.hide{
     animation-duration: 1s;
     animation-direction: alternate;
     animation-iteration-count: infinite;
+}
+
+
+/*       PÁGINA DE INFO          */
+
+#introducirInformacion{
+    margin: 1% auto;
+    width: 80%;
+    height: 60%;
+    border: 1px solid black;
+    background-color: rgba(255, 235, 205, 0.911);
+}
+
+#introducirInformacion p{
+    width: 80%;
+    
+    margin: 1% auto;
+    margin-top: 4%;
+    background: blue;
 }
