@@ -136,11 +136,13 @@ for(let i=0; i<arrayImg.length; i++){
     }
   });
 }
+
 function comprobarNumerico(elemento, i){
   if(isNaN(elemento.value) || elemento.value=="" || elemento.value<=0){
     return false;
   }else{
-    return libreDeErrorCeroDelanteNumero(elemento.value); //Para que no comience en 0
+    elemento.value = libreDeErrorCeroDelanteNumero(elemento.value)
+    return true;
   }
 }
 function cambioGradualColorFondoVerdeFrame(i) {

@@ -1,3 +1,8 @@
+/* //////////////////////////      
+        General
+    /////////////////////////   */
+
+
 html{
     height: 100%;
     background-image: url(../img/walppaper.jpeg);
@@ -10,6 +15,10 @@ html{
 body{
     height: 100%;
 }
+
+/* //////////////////////////      
+        Cabecera
+    /////////////////////////   */
 
 header h1{
     margin-top: 3% ;
@@ -27,6 +36,10 @@ header h1 a{
     color: rgba(17, 26, 17, 0.61);
     text-shadow: 2px 1px rgb(102, 96, 96);
 }
+
+/* //////////////////////////      
+        Zonas principales
+    /////////////////////////   */
 
 .mainSection{
     padding: 1%;
@@ -54,6 +67,10 @@ header h1 a{
     box-shadow: 1px 2px;
     overflow-y: auto;
 }
+
+/* //////////////////////////      
+        Frame de cada fruta 
+    /////////////////////////   */
 
 .frame{
     width: 14.5%;
@@ -108,6 +125,11 @@ header h1 a{
     padding: 0%;
 }
 
+/* //////////////////////////      
+        Información dentro
+            de Frame 
+    /////////////////////////   */
+
 .invisiblePrice_moved{
     clear: both;
     opacity: 1;
@@ -141,6 +163,9 @@ p.hide{
     opacity: 0;
 }
 
+/* //////////////////////////      
+        Zona Inferior 
+    /////////////////////////   */
 
 .horizontalSection textarea{
     width: 70%;
@@ -170,7 +195,9 @@ p.hide{
 
 }
 
-/* CLASES FRUTAAAAAAAAAAAAAAAAAS */
+/* //////////////////////////      
+        Clases fruta Lateral 
+    /////////////////////////   */
 
 .negrita{
     font-weight: bold;
@@ -208,7 +235,9 @@ p.hide{
 }
 
 
-/*       PÁGINA DE INFO          */
+/* //////////////////////////      
+        PÁGINA DE INFO 
+    /////////////////////////   */
 
 #introducirInformacion{
     margin: 1% auto;
@@ -217,11 +246,9 @@ p.hide{
     border: 1px solid black;
     background-color: rgba(255, 235, 205, 0.911);
 }
-
 #introducirInformacion :nth-child(1){
     margin-top: 4%;
 }
-
 #introducirInformacion p{
     width: 80%;
     padding: 1%;
@@ -230,7 +257,6 @@ p.hide{
     text-decoration: wavy;
     border-radius: 13px; 
 }
-
 .frutaInvierno{
     background-color: rgba(81, 107, 224, 0.356);
     border-radius: 4px; 
@@ -239,12 +265,10 @@ p.hide{
     background-color: rgba(211, 149, 56, 0.226);
     border-radius: 4px; 
 }
-
 #botonCerrar{
     width: 20%;
     margin-left: 40%;
 }
-
 #headerNewPage{
     margin-left: 20%;
 }

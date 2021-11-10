@@ -1,9 +1,4 @@
 "use strict";
-/*TODO 
-FUNCIONALIDAD-->
------MOSTRAR VENTANA EMERGENTE CON TODA LA INFO DE VERANO O INVIERNO
-//reloj cuidado cuando es solo 1 min, 07 por ejemploi
-*/
 
 ////////////////////////////////////////////////////////////
 //      On load         //
@@ -32,7 +27,7 @@ var las_or_los = (genero) => (genero=="F"?"Las":"Los");
 var pluralDeNombre = (nombre) => nombre[nombre.length-1]=="n"?nombre+"es":nombre+"s";
 var proximidad_o_no = (proximidad) => (proximidad?"":"no son ");
 var conservarFuera_or_dentro = (conservarNevera) => (conservarNevera?"dentro":"fuera");
-//TODO quitar acentos al plurar
+
 
 ////////////////////////////////////////////////////////////
 //                !!!! Mostrar compra !!!!                //
@@ -58,9 +53,11 @@ function mostrarCompra() {
 }
 
 function diaHora(textAreaElement){
-var today = new Date();
-var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-var time = today.getHours() + ":" + today.getMinutes();
+  
+  var today = new Date();
+  var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+  var time = today.getHours() + ":" + correcionMinutos(today);
+
 textAreaElement.value+=`Fecha de compra: ${date} a las ${time}\n\n`
 }
 
@@ -203,12 +200,24 @@ function iluminarRecienAdded(elementosMismaClase){
 /////////////////////////////////////////////////////////////
 //              Tratamiento de errores                     //
 ////////////////////////////////////////////////////////////
-//TODO fixear para que quite el cero y no te lo anule
+
 function libreDeErrorCeroDelanteNumero(numero){
   if(numero.toString()[0]==0 && numero.toString()[1]!="."){
-    console.error("Comenzar con un número en 0 puede ocasionar problemas, evítalo, por favor.")
-    return false;
-  }else{
-    return true;
+    if(numero.toString()[1]==0 && numero.toString().length>2){
+      numero=numero.toString()[2];
+    }else{
+      numero=numero.toString()[1];
+    }
   }
+  return numero;
+}
+
+function correcionMinutos(today){
+  let minutes;
+  if(today.getMinutes()<10){
+    minutes="0"+today.getMinutes();
+  }else{
+    minutes=today.getMinutes();
+  }
+  return minutes;
 }
