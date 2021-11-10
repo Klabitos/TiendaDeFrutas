@@ -100,22 +100,38 @@ function formatNumber(num, decimales) {
 ////////////////////////////////////////////////////////////
 
 function crearVentana(cestaFiltrada){
-  let ventana = window.open("./informacion.html","Información Extra","toolbar=no, location=no,width=700, height=1000");
-  ventana.moveBy(screen.width-700,screen.height/10); 
-  ventana.addEventListener("load", () => {
-    let elementoDiv=ventana.document.getElementById("introducirInformacion");
-    for(let i=0; i<cestaFiltrada.length; i++){
-      let parrafo=document.createElement("p");
-      if((cestaFiltrada[i] instanceof WinterFruit)==true){
-        parrafo.innerText=`${las_or_los(cestaFiltrada[i].genero)} ${pluralDeNombre(cestaFiltrada[i].nombre)} son frutas de invierno, es recomendable conservarlas ${conservarFuera_or_dentro(cestaFiltrada[i].conservarNevera)} de la nevera.`;
-        parrafo.classList.add("frutaInvierno");
-      }else{
-        parrafo.innerText=`${las_or_los(cestaFiltrada[i].genero)} ${pluralDeNombre(cestaFiltrada[i].nombre)} son frutas de verano, ${proximidad_o_no(cestaFiltrada[i].proximidad)}de proximidad y son de ${cestaFiltrada[i].region}.`;
-        parrafo.classList.add("frutaVerano");
-      }
-      elementoDiv.appendChild(parrafo);
+  let ventana = window.open("","Información Extra","toolbar=no, location=no,width=700, height=1000, left=10000");
+  let parrafo=`<!DOCTYPE html> 
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Información de compra</title>
+      <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.0/normalize.css"> <!-- Igualar estilo de navegadores-->
+      <link rel="stylesheet" href="../css/style.css">
+  </head>
+  <body>
+      <header id="headerNewPage">
+          <h1>Info de compra <br> <a>果果</a></h1>
+          
+      </header> 
+      
+      <div id="introducirInformacion">`;
+  //Hemos tenido que crear la pagina html entera aquí porque daba error por CrossedReferences intentando acceder a la información con Document
+  for(let i=0; i<cestaFiltrada.length; i++){
+    if((cestaFiltrada[i] instanceof WinterFruit)==true){
+      parrafo+=`<p class="frutaInvierno">${las_or_los(cestaFiltrada[i].genero)} ${pluralDeNombre(cestaFiltrada[i].nombre)} son frutas de invierno, es recomendable conservarlas ${conservarFuera_or_dentro(cestaFiltrada[i].conservarNevera)} de la nevera. </p>`;
+  
+    }else{
+      parrafo+=`<p class="frutaVerano">${las_or_los(cestaFiltrada[i].genero)} ${pluralDeNombre(cestaFiltrada[i].nombre)} son frutas de verano, ${proximidad_o_no(cestaFiltrada[i].proximidad)}de proximidad y son de ${cestaFiltrada[i].region}.</p>`;
     }
-  });
+  }
+  parrafo+=`    </div>
+  <button id="botonCerrar" onclick="window.close();">Cerrar Ventana</button>
+</body>
+</html>`;
+  ventana.document.write(parrafo);
 }
  
 
