@@ -28,7 +28,11 @@ function ordenarCestaCompra(cesta) {
 }
 
 var kilo_or_kilos = (num) => (num <= 1 ? "kilo" : "kilos");
-
+var las_or_los = (genero) => (genero=="F"?"Las":"Los");
+var pluralDeNombre = (nombre) => nombre[nombre.length-1]=="n"?nombre+"es":nombre+"s";
+var proximidad_o_no = (proximidad) => (proximidad?"":"no son ");
+var conservarFuera_or_dentro = (conservarNevera) => (conservarNevera?"dentro":"fuera");
+//TODO quitar acentos al plurar
 
 ////////////////////////////////////////////////////////////
 //                !!!! Mostrar compra !!!!                //
@@ -96,17 +100,21 @@ function formatNumber(num, decimales) {
 ////////////////////////////////////////////////////////////
 
 function crearVentana(cestaFiltrada){
-  let ventana = window.open("./informacion.html","Información Extra","toolbar=no, location=no,width=500, height=500");
-  ventana.moveBy(screen.width/4+(screen.width/4)/2,screen.height/4); //Se centra la ventana
+  let ventana = window.open("./informacion.html","Información Extra","toolbar=no, location=no,width=700, height=1000");
+  ventana.moveBy(screen.width-700,screen.height/10); 
   ventana.addEventListener("load", () => {
     let elementoDiv=ventana.document.getElementById("introducirInformacion");
     for(let i=0; i<cestaFiltrada.length; i++){
       let parrafo=document.createElement("p");
-      parrafo.innerText="Bentxo";
+      if((cestaFiltrada[i] instanceof WinterFruit)==true){
+        parrafo.innerText=`${las_or_los(cestaFiltrada[i].genero)} ${pluralDeNombre(cestaFiltrada[i].nombre)} son frutas de invierno, es recomendable conservarlas ${conservarFuera_or_dentro(cestaFiltrada[i].conservarNevera)} de la nevera.`;
+        parrafo.classList.add("frutaInvierno");
+      }else{
+        parrafo.innerText=`${las_or_los(cestaFiltrada[i].genero)} ${pluralDeNombre(cestaFiltrada[i].nombre)} son frutas de verano, ${proximidad_o_no(cestaFiltrada[i].proximidad)}de proximidad y son de ${cestaFiltrada[i].region}.`;
+        parrafo.classList.add("frutaVerano");
+      }
       elementoDiv.appendChild(parrafo);
     }
-    
-
   });
 }
  
